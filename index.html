@@ -1,0 +1,35 @@
+<html ng-app="Ranger">
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+</head>
+<body>
+	<div id="hitlistContainer" ng-controller="HitlistController" bindonce>
+		<div id="toolbar">
+			<div id="resstats">
+				<div class="resTime">{{victims.restime}}ms</div>
+				<div class="resTotal" >{{victims.restotal}} hits</div>
+			</div>
+			<div id="newVictim">
+				<form id="newVictimForm" formhandler>
+					<input ng-class="{'folderNameInput': true, 'pulseerror': victims.isinvalid}" type="text" ng-change="victims.checkalreadyexists()" ng-model="victims.value">
+				</form>
+			</div>
+		</div>
+		<ul id="hitlist">
+			<li class="filelistItem" bo-id="file._id" ng-repeat="file in hitlist | filter: filterFileItem | orderBy: sort.predicate:sort.reverse">
+				<div class="vicage" bo-text="file._score" ng-click="sort.predicate='_score'; sort.reverse=!sort.reverse"></div>
+				<div class="vicname" bo-text="file._source.name" ng-click="sort.predicate='_source.name'; sort.reverse=!sort.reverse"></div>
+				<div class="vicname" bo-text="file._source.fullpath" ng-click="sort.predicate='_source.fullpath'; sort.reverse=!sort.reverse"></div>
+			</li>
+		</ul>
+	</div>
+	<script src="js/jquery-2.0.3.min.js"></script>
+	<script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="js/angular-1.2.2.js"></script>
+	<script src="js/bindonce.js"></script>
+	<script src="js/moment.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
